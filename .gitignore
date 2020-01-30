@@ -1,0 +1,9 @@
+com/algoexpert/*
+com/algoexpert/video-explainations/*
+bin/*
+<<<<<<< HEAD
+.settings/*
+video-explainations/*
+=======
+.settings/*
+>>>>>>> parent of 3bf5319... graph problems dfs/bfs backtracking
