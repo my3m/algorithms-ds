@@ -19,6 +19,15 @@ import org.junit.Test;
  * w/o building graph
  */
 public class m_127_WordLadder {
+	/*
+	 * This implementation works but it runs slow. Building the graph takes N * N *
+	 * Total Number of Chars. Instead of using graph to find connecting nodes, (1)
+	 * create a set for word list (2) for word in context to find neighbours, run a
+	 * loop from 'a' to 'z' for each char, see if it exists in (1) set (3) if(2)
+	 * returns true, add it to list of neighbours (4) Complexity: We run this for
+	 * all possible words (N) * Total Chars * 26
+	 * 
+	 */
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
 		/*
 		 * It's possible not to transform a word (It does not exist in wordlist or
@@ -36,9 +45,9 @@ public class m_127_WordLadder {
 		List<String> wordList2 = new ArrayList<>(wordList);
 		wordList2.add(beginWord);
 		Map<String, List<String>> g = buildGraph(wordList2);
-		if (!g.containsKey(endWord)) {
-			return 0;
-		}
+//		if (!g.containsKey(endWord)) {
+//			return 0;
+//		}
 		/*
 		 * In this case, a visited list for each node is not applicable. hit->hot (hot)
 		 * visited in "hit", but in dot-> hot (dot does not contain hot in visited)
@@ -52,12 +61,67 @@ public class m_127_WordLadder {
 			distances.put(key, Integer.MAX_VALUE);
 		}
 		distances.put(beginWord, 0);
+		if (!distances.containsKey(endWord)) {
+			return 0;
+		}
 		// dfs(g, distances, 0, visited, beginWord, endWord, 0);
-		bfs(g, distances, visited, beginWord, endWord);
+		//bfs(g, distances, visited, beginWord, endWord);
+		bfs2(distances, visited, wordList, beginWord, endWord);
 		for (String key : distances.keySet()) {
 			System.out.printf("%s (%d)\r\n", key, distances.get(key));
 		}
 		return distances.get(endWord) + 1;
+	}
+
+	List<String> getNeighbours(String source, Set<String> words) {
+
+		List<String> neighbours = new ArrayList<String>();
+		char[] chars = source.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			for (char c = 'a'; c <= 'z'; c++) {
+				char old = chars[i];
+				chars[i] = c;
+				String transformed = new String(chars);
+				if (words.contains(transformed)) {
+					neighbours.add(transformed);
+				}
+				chars[i] = old;
+			}
+		}
+		return neighbours;
+	}
+
+	void bfs2(Map<String, Integer> distances, Set<String> visited, List<String> words, String startV, String endV) {
+
+		Set<String> wordsdict = new HashSet<String>();
+		for (String w : words) {
+			wordsdict.add(w);
+		}
+
+		Queue<String> queue = new LinkedList<String>();
+		queue.add(startV);
+		while (queue.size() > 0) {
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
+				String node = queue.poll();
+				if (node.equals(endV)) {
+					break;
+				}
+				List<String> neighbours = getNeighbours(node, wordsdict);
+				int d = distances.get(node);
+				for (int j = 0; j < neighbours.size(); j++) {
+					String neighbour = neighbours.get(j);
+					if (visited.contains(neighbour)) {
+						continue;
+					}
+					if (d + 1 < distances.get(neighbour)) {
+						distances.put(neighbour, d + 1);
+					}
+					visited.add(neighbour);
+					queue.offer(neighbour);
+				}
+			}
+		}
 	}
 
 	void bfs(Map<String, List<String>> graph, Map<String, Integer> distances, Set<String> visited, String startV,
@@ -139,11 +203,18 @@ public class m_127_WordLadder {
 		for (int i = 0; i < len; i++) {
 			if (source.charAt(i) != destination.charAt(i)) {
 				mismatch++;
+				// improvement
+				if (mismatch > 1)
+					return false;
 			}
 		}
-		return mismatch == 1;
+		return true;
 	}
 
+	// [0,1,2,3,4]
+	// M = total chars
+	// N = number of words
+	// N * N *
 	Map<String, List<String>> buildGraph(List<String> nodes) {
 		Map<String, List<String>> g = new HashMap<String, List<String>>();
 		for (int i = 0; i < nodes.size(); i++) {
