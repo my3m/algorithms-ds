@@ -55,18 +55,25 @@ public class m_79_WordSearch {
 			/*
 			 * We can get away with these checks, since they are performed in base cases
 			 */
-			if((ni >= 0 && ni < board.length) && (nj >= 0 && nj < board[0].length)) {
-				if(k + 1 < word.length() && word.charAt(k + 1) == board[ni][nj]) {
-					if(dfs(board, visited, word, ni, nj, k + 1)) {
-						return true;
-					}
-					else {
-//						if(visited[ni][nj])
-//							visited[ni][nj] = false;
-					}
-				}
+			
+			if(dfs(board, visited, word, ni, nj, k + 1)) {
+				return true;
 			}
+			
+//This is not needed, you are already doing it in base case
+//			if((ni >= 0 && ni < board.length) && (nj >= 0 && nj < board[0].length)) {
+//				if(k + 1 < word.length() && word.charAt(k + 1) == board[ni][nj]) {
+//					if(dfs(board, visited, word, ni, nj, k + 1)) {
+//						return true;
+//					}
+//					else {
+////						if(visited[ni][nj])
+////							visited[ni][nj] = false;
+//					}
+//				}
+//			}
 		}
+		//backtracking if we reach a invalidpath, go to previous correct state
 		visited[i][j] = false;
 		return false;
 	}
