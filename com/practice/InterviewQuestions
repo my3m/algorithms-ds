@@ -1,2 +1,16 @@
 Display the contents of a directory
 Parse JSON string
+
+--------------------------------------------------------------
+Question:
+Given an alphanumeric string with no special characters, reformat the string without adding or
+removing any characters so that no alphabet characters are adjacent and no digits are adjacent.
+
+Note:
+1- Keep the relative order same before and after the rearranging the string.
+2- If not possible to rearrange , return string with all aplhabets grouped and then all digits grouped.
+
+Examples:
+x3ds -> xds3
+abca123de4f56 -> a1b2c3a4d5e6f
+--------------------------------------------------------------------
