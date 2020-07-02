@@ -7,30 +7,42 @@ import org.junit.Test;
 
 public class BinarySearchLastOccurence {
 	public int binarySearch(int[] array, int left, int right, int target) {
-		if(left > right)
-			return -1;
-		if(array[array.length - 1] == target) 
-			return array.length - 1;
-		if(array[array.length - 1] < target)
-			return -1;
-		if(array[0] > target)
-			return -1;
-		int mid = left + ((right-left)/2);
-		int lastOccurence = -1;
-		while(left<=right) {
-			mid = left + ((right-left)/2);
-			if(target > array[mid]) {
-				left = mid + 1;
-			}
-			else if(target < array[mid]) {
-				right = mid - 1;
+//		if(left > right)
+//			return -1;
+//		if(array[array.length - 1] == target) 
+//			return array.length - 1;
+//		if(array[array.length - 1] < target)
+//			return -1;
+//		if(array[0] > target)
+//			return -1;
+//		int mid = left + ((right-left)/2);
+//		int lastOccurence = -1;
+//		while(left<=right) {
+//			mid = left + ((right-left)/2);
+//			if(target > array[mid]) {
+//				left = mid + 1;
+//			}
+//			else if(target < array[mid]) {
+//				right = mid - 1;
+//			}
+//			else {
+//				lastOccurence = mid;
+//				left = mid + 1;
+//			}
+//		}
+//		return lastOccurence;
+		
+		int l = 0, r = array.length;
+		while(l < r) {
+			int m = l + (r-l)/2;
+			if(target < array[m]) {
+				r = m;
 			}
 			else {
-				lastOccurence = mid;
-				left = mid + 1;
+				l = m + 1;
 			}
 		}
-		return lastOccurence;
+		return l - 1;
 	}
 	@Test
 	public void Test1() {

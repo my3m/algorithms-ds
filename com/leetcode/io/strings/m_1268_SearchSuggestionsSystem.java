@@ -1,6 +1,5 @@
 package io.strings;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.*;
@@ -8,7 +7,7 @@ import java.util.*;
 import org.junit.Test;
 
 /*
- 
+ 		IDEA!!!!!!!!!!!!!!!!!!!!!!!!!!
  idea; starting with first char (0 index), pre-populate an "availableSuggestions" list
  		from the products array with products[0] == searchWord[0]
  			Sort the list to make lexicographically minimum appear first

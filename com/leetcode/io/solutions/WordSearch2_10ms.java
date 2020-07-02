@@ -1,3 +1,8 @@
+package io.solutions;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 use trie to implement here.
 trie + dfs
@@ -45,7 +50,7 @@ class Solution {
                 char c = board[i][j];
                 if (root.children[c - 'a'] != null) {
                     boolean[][] visited = new boolean[m][n];
-                    // implement 细节,i, j 对应 root 的下一层！！！！
+                    // implement ç»†èŠ‚,i, j å¯¹åº” root çš„ä¸‹ä¸€å±‚ï¼�ï¼�ï¼�ï¼�
                     dfs(i, j, board, visited, res, root);
                 }
             }
@@ -56,7 +61,7 @@ class Solution {
     // like word search I, you still have to mark visted as you go,  [["a","a"]], ["aaa"]
     
     
-    // 你需要搞清楚　i, j 对应当是当前node 还是下一个node.
+    // ä½ éœ€è¦�æ�žæ¸…æ¥šã€€i, j å¯¹åº”å½“æ˜¯å½“å‰�node è¿˜æ˜¯ä¸‹ä¸€ä¸ªnode.
     private void dfs(int i, int j, char[][] board, boolean[][] visited, List<String> res, TrieNode cur) {
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j]) {
             return;

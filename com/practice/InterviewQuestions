@@ -1,6 +1,17 @@
 Display the contents of a directory
 Parse JSON string
 
+Given array of digits (0-9, no negatives) and another number, a lower bound, construct next largest number. e.g.
+
+digits: [8,5,2], lowerBound 100: number "258"
+digits: [8,5,2], lowerBound 260: number "285"
+digits: [8,5,2], lowerBound 500: number "528"
+digits: [8,5,2], lowerBound 528: number "582"
+digits: [8,5,2], lowerBound 585: number "825"
+digits: [9,0,0], lowerBound 0: number "9"
+digits: [9,0,0], lowerBound 10: number "90"
+Could it be sloved in O(n)?
+
 --------------------------------------------------------------
 Question:
 Given an alphanumeric string with no special characters, reformat the string without adding or
@@ -14,3 +25,15 @@ Examples:
 x3ds -> xds3
 abca123de4f56 -> a1b2c3a4d5e6f
 --------------------------------------------------------------------
+Given a dictionary and a character array, print all valid words that are possible using characters from the array.
+
+Examples:
+Input : Dict - {"go","bat","me","eat","goal", 
+                                "boy", "run"} 
+        arr[] = {'e','o','b', 'a','m','g', 'l'} 
+Output : go, me, goal. 
+https://www.geeksforgeeks.org/print-valid-words-possible-using-characters-array/
+
+
+Find an element in nearly sorted array, with elements slightly misplaces[-1, +1]- https://www.geeksforgeeks.org/search-almost-sorted-array/
+Level order traversal of tree and difference between odd and even node sums -https://www.geeksforgeeks.org/difference-between-sums-of-odd-and-even-levels/

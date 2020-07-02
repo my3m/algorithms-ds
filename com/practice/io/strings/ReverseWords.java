@@ -7,6 +7,7 @@ import org.junit.Test;
 public class ReverseWords {
 	@Test
 	public void Test1() {
+		String[] v1s = "32".split("\\.");
 		char[] arr = "12345678".toCharArray();
 		String r = ReverseWords.reverse(arr, 0, arr.length - 1);
 		assertEquals("87654321", r);

@@ -34,6 +34,59 @@ import org.junit.Test;
     [1],[6],[6]
     */
 public class m_364_NestedListWeigtSum2 {
+	
+	
+	/**
+
+Recursive
+------------------------------------------------------------------
+int depthSumInverseUsingWeightedSum(List<NestedInteger> nestedList, int unweightedSum) {
+        if(nestedList.size() == 0)
+            return 0;
+        int weightedSum = 0;
+        List<NestedInteger> lists = new ArrayList<>();
+        for(NestedInteger i : nestedList) {
+            if(i.isInteger()) {
+                unweightedSum += i.getInteger();
+            }else {
+                for(NestedInteger j : i.getList()) {
+                    lists.add(j);
+                }
+            }
+        }
+        weightedSum += unweightedSum;
+        weightedSum += depthSumInverseUsingWeightedSum(lists, unweightedSum);
+        return weightedSum;
+    }
+
+BFS
+---------------------------------------------------------------------
+    int depthSumInverseUsingBFS(List<NestedInteger> nestedList) {
+        
+        Queue<List<NestedInteger>> queue = new LinkedList<>();
+        queue.offer(nestedList);
+        int unweightedSum = 0, weightedSum = 0;
+        while(queue.size() > 0) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                List<NestedInteger> list = queue.poll();
+                for(NestedInteger j : list) {
+                    if(j.isInteger()) {
+                        unweightedSum += j.getInteger();
+                    } else {
+                        queue.offer(j.getList());
+                    }
+                }
+            }
+            weightedSum += unweightedSum;
+        }
+        return weightedSum;
+    }
+
+
+	 */
+	
+	
 	public int depthSumInverse(Object[] nestedList) {
 		//return depthSumInverseUsingList(nestedList);
 		List<Object> values = new ArrayList<>();
